@@ -1,0 +1,15 @@
+.izvici {
+  @include media-breakpoint-up(xl) {
+    margin-top: $spacer*8;
+    margin-bottom: $spacer*3;
+  }
+  font-size: $spacer*3;
+  font-style: oblique;
+  font-weight: $font-weight-bold;
+
+  .list-inline-item {
+    &:last-child {
+      color: $magenta;
+    }
+  }
+}

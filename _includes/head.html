@@ -1,0 +1,11 @@
+<head>
+  <meta charset="utf-8">
+  <title>
+  {% if page.url == '/' %}
+    {{ site.title }} &ndash; {{ site.data.bushava-azbuka.kniga.avtor[0] }}, {{ site.data.bushava-azbuka.kniga.avtor[1] }} &mdash; {{ site.data.bushava-azbuka.kniga.mesto }}, {{ site.data.bushava-azbuka.kniga.godina }}
+  {% else %}
+    Буква {{ page.golema_bukva }} &ndash; {{ page.name }} &mdash; {{ site.title }}
+  {% endif %}
+  </title>
+  <link rel="stylesheet" href="/assets/main.css">
+</head>

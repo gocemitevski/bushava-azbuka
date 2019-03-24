@@ -1,0 +1,14 @@
+.zanimanja {
+  .title {
+    @extend .h5;
+    margin-top: $spacer*1.5;
+    &:after {
+      content: ":";
+    }
+  }
+  .item{
+    @extend .h5;
+    margin: $spacer auto;
+    letter-spacing: 0.05rem;
+  }
+}

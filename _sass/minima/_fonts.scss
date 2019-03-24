@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'FreeSerif';
+  src: url('free-serif/FreeSerifBold.woff2') format('woff2'),
+    url('free-serif/FreeSerifBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreeSerif';
+  src: url('free-serif/FreeSerif.woff2') format('woff2'),
+    url('free-serif/FreeSerif.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreeSerif';
+  src: url('free-serif/FreeSerifItalic.woff2') format('woff2'),
+    url('free-serif/FreeSerifItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: 'FreeSerif';
+  src: url('free-serif/FreeSerifBoldItalic.woff2') format('woff2'),
+    url('free-serif/FreeSerifBoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: oblique;
+}

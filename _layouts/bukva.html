@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="mk">
+{% include head.html %}
+{% assign search_url = 'https://www.google.com/search?q=' %}
+
+<body>
+  {% include navbar.html %}
+  <div class="bg-white">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-10 offset-xl-1">
+          <main id="content">
+            <div class="row h-100">
+              <div class="col-xl-6">
+                <section class="section-wrapper lichi-na">
+                  <div class="d-flex flex-wrap align-items-end section-wrapper">
+                    <header class="d-flex flex-wrap">
+                      <h1 class="box box-lg"><span>{{ page.golema_bukva }}</span></h1>
+                      <h2 class="box box-sm"><span>{{ page.mala_bukva }}</span></h2>
+                    </header>
+                    <h2 class="section-title my-0 mx-2">Личи на</h2>
+                    <button type="button" class="btn btn-outline-secondary btn-video" data-toggle="modal" data-target="#videoEpizoda">видео</button>
+                  </div>
+                  <ul class="list-unstyled">
+                    {% for opis in page.lichi_na %}
+                    <li class="h4 list-unstyled-item">{{ opis }}</li>
+                    {% endfor %}
+                  </ul>
+                </section>
+                <section class="section-wrapper zanimanja">
+                  <h2 class="section-title">Занимања</h2>
+                  <ul class="list-unstyled">
+                    {% for zanimanje in page.zanimanja %}
+                    <li class="list-unstyled-item">
+                      <h3 class="title">{{ zanimanje.ime }}</h3>
+                      <p class="item text-uppercase">{{ zanimanje.iskaz }}</p>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </section>
+              </div>
+              <div class="col-xl-6 border-dark-xl">
+                <div class="row h-100">
+                  <div class="col-xl-12">
+                    <section class="section-wrapper iminja">
+                      <h2 class="section-title">{% if page.mala_bukva == 'ч' or page.mala_bukva == 'ш' %}(<span class="prefix">през</span>){%
+                        endif %}Имиња</h2>
+                      <ul class="list-inline">
+                        {% for ime in page.iminja %}
+                        <li class="h5 list-inline-item">{{ ime }}</li>
+                        {% endfor %}
+                      </ul>
+                    </section>
+                  </div>
+                  <div class="col-xl-6">
+                    <section class="section-wrapper rastenija">
+                      <h2 class="section-title">Растенија</h2>
+                      <ul class="list-unstyled">
+                        {% for rastenie in page.rastenija %}
+                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ rastenie }}" target="_blank">{{
+                            rastenie }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </section>
+                  </div>
+                  <div class="col-xl-6 border-dark-xl">
+                    <section class="section-wrapper zhivotni">
+                      <h2 class="section-title">Животни</h2>
+                      <ul class="list-unstyled">
+                        {% for zhivotno in page.zhivotni %}
+                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ zhivotno }}" target="_blank">{{
+                            zhivotno }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </section>
+                    <section class="section-wrapper jadenja">
+                      <h2 class="section-title">Јадења</h2>
+                      <ul class="list-unstyled">
+                        {% for jadenje in page.jadenja %}
+                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ jadenje }}" target="_blank">{{
+                            jadenje }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <section class="section-wrapper izvici">
+              <h2 class="sr-only">Извици</h2>
+              <ul class="list-inline">
+                {% for izvik in page.izvici %}
+                <li class="list-inline-item">{{ izvik }}</li>
+                {% endfor %}
+              </ul>
+            </section>
+            <section class="section-wrapper sliki">
+              <h2 class="sr-only">Слики</h2>
+              <img class="img-fluid w-100" src="{{ page.sliki[0] }}" alt="{{ page.name }} &ndash; буква {{ page.golema_bukva }} &mdash; {{ site.title }}">
+            </section>
+            <div class="modal fade" tabindex="-1" role="dialog" id="videoEpizoda">
+                <div class="modal-dialog modal-xl" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><span class="text-uppercase">{{ site.title }}</span> &ndash; буква {{
+                        page.golema_bukva }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Затвори">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <section class="section-wrapper videa">
+                        <h2 class="sr-only">Видеo</h2>
+                        {% for video in page.videa %}
+                        <div class="embed-responsive embed-responsive-16by9">
+                          <iframe id="videoIframe" width="560" height="315" src="{{ video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        </div>
+                        {% endfor %}
+                      </section>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Затвори</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </main>
+        </div>
+      </div>
+      {% include footer.html %}
+    </div>
+  </div>
+  {% include modals.html %}
+  {% include shpica.html %}
+  {% include scripts.html %}
+</body>
+
+</html>

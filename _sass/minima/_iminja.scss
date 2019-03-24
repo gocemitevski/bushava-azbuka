@@ -1,0 +1,13 @@
+.iminja {
+  .list-inline {
+    font-style: oblique;
+  }
+
+  .list-inline-item {
+    &:not(:last-child) {
+      &:after {
+        content: ",";
+      }
+    }
+  }
+}

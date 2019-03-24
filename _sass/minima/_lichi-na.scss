@@ -1,0 +1,13 @@
+.lichi-na {
+  .section-title {
+    &:after {
+      content: ":";
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .list-unstyled {
+      padding-right: $spacer*5;
+    }
+  }
+}
