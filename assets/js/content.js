@@ -2,9 +2,15 @@ $(document).ready(function (e) {
 
   var audio = document.getElementById("audio");
   var video = document.getElementById("video");
+  var isUnmuted = localStorage.getItem('isUnmuted');
 
-  if (localStorage.getItem('isUnmuted') == undefined) {
+  if (isUnmuted == undefined) {
     localStorage.setItem('isUnmuted', 0);
+  } else{
+    if (isUnmuted == '1'){
+      video.muted = !Boolean(isUnmuted);
+      audioIconToggle();
+    }
   }
 
   $(audio).on("click", function (e) {
@@ -106,9 +112,6 @@ function modalDestroy() {
       video.muted = false;
       localStorage.setItem('isUnmuted', 1);
       audioIconToggle();
-    } else {
-      video.muted = true;
-      localStorage.setItem('isUnmuted', 0);
     }
 
     iframe.remove();
