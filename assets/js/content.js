@@ -1,6 +1,26 @@
 $(document).ready(function (e) {
 
-  modalSoundControl();
+  var audio = document.getElementById("audio");
+  var video = document.getElementById("video");
+
+  if (localStorage.getItem('isUnmuted') == undefined) {
+    localStorage.setItem('isUnmuted', 0);
+  }
+
+  $(audio).on("click", function (e) {
+
+    if (video.muted) {
+      video.muted = false;
+      localStorage.setItem('isUnmuted', 1);
+    } else {
+      video.muted = true;
+      localStorage.setItem('isUnmuted', 0);
+    }
+
+    audioIconToggle();
+
+  });
+
   modalCreate();
   modalDestroy();
   bindLinks();
@@ -47,29 +67,10 @@ function bindLinks() {
         'content': $('#content').removeClass('empty').html()
       }, newTitle, url);
 
-      modalSoundControl();
-      modalDestroy();
       modalCreate();
+      modalDestroy();
 
     });
-
-  });
-
-}
-
-function modalSoundControl() {
-
-  $('#videoEpizoda').on('shown.bs.modal', function () {
-
-    var video = document.getElementById("video");
-
-    if (video.muted === false) {
-      video.muted = true;
-      audioIconToggle();
-      localStorage.setItem('hasUnmuted', false);
-    } else {
-      localStorage.setItem('hasUnmuted', true);
-    }
 
   });
 
@@ -79,6 +80,11 @@ function modalCreate() {
 
   // Make sure iframe is reinitialized when modal is closed.
   $('#videoEpizoda').on('show.bs.modal', function () {
+
+    var video = document.getElementById("video");
+
+    video.muted = true;
+    audio.classList.remove("on");
 
     var videoPlaceholder = $('#videoPlaceholder');
 
@@ -91,20 +97,21 @@ function modalCreate() {
 function modalDestroy() {
 
   // Make sure iframe is reinitialized when modal is closed.
-  $('#videoEpizoda').on('hidden.bs.modal', function () {
+  $('#videoEpizoda').on('hide.bs.modal', function () {
 
-    var video = document.getElementById("video");
-    var hasUnmuted = Boolean(localStorage.getItem('hasUnmuted'));
     var iframe = $('#videoIframe');
+    var isUnmuted = localStorage.getItem('isUnmuted');
 
-    if (hasUnmuted === true) {
+    if (isUnmuted === '1') {
       video.muted = false;
+      localStorage.setItem('isUnmuted', 1);
       audioIconToggle();
     } else {
-      localStorage.setItem('hasUnmuted', false);
+      video.muted = true;
+      localStorage.setItem('isUnmuted', 0);
     }
 
-    $('#videoIframe').remove();
+    iframe.remove();
 
   });
 
