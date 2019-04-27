@@ -113,8 +113,7 @@
                         <h2 class="sr-only">Видеo</h2>
                         {% for video in page.videa %}
                         <div class="embed-responsive embed-responsive-16by9">
-                          <iframe id="videoIframe" width="560" height="315" src="{{ video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                          <div id="videoPlaceholder" data-src="{{ video }}?autoplay=1"></div>
                         </div>
                         {% endfor %}
                       </section>

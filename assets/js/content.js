@@ -1,6 +1,7 @@
 $(document).ready(function (e) {
 
   modalSoundControl();
+  modalCreate();
   modalDestroy();
   bindLinks();
 
@@ -48,6 +49,7 @@ function bindLinks() {
 
       modalSoundControl();
       modalDestroy();
+      modalCreate();
 
     });
 
@@ -65,9 +67,22 @@ function modalSoundControl() {
       video.muted = true;
       audioIconToggle();
       localStorage.setItem('hasUnmuted', false);
-    } else{
+    } else {
       localStorage.setItem('hasUnmuted', true);
     }
+
+  });
+
+}
+
+function modalCreate() {
+
+  // Make sure iframe is reinitialized when modal is closed.
+  $('#videoEpizoda').on('show.bs.modal', function () {
+
+    var videoPlaceholder = $('#videoPlaceholder');
+
+    videoPlaceholder.parent().append('<iframe id="videoIframe" width="560" height="315" src="' + videoPlaceholder.attr('data-src') + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 
   });
 
@@ -82,15 +97,14 @@ function modalDestroy() {
     var hasUnmuted = Boolean(localStorage.getItem('hasUnmuted'));
     var iframe = $('#videoIframe');
 
-    console.log(hasUnmuted);
-
-    if (hasUnmuted) {
+    if (hasUnmuted === true) {
       video.muted = false;
       audioIconToggle();
+    } else {
+      localStorage.setItem('hasUnmuted', false);
     }
 
-    iframe = $('#videoIframe');
-    iframe.attr('src', iframe.attr('src'));
+    $('#videoIframe').remove();
 
   });
 
