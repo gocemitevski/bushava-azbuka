@@ -57,7 +57,7 @@
                       <h2 class="section-title">Растенија</h2>
                       <ul class="list-unstyled">
                         {% for rastenie in page.rastenija %}
-                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ rastenie }}" target="_blank">{{
+                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ rastenie }}" target="_blank" rel="noopener">{{
                             rastenie }}</a></li>
                         {% endfor %}
                       </ul>
@@ -68,7 +68,7 @@
                       <h2 class="section-title">Животни</h2>
                       <ul class="list-unstyled">
                         {% for zhivotno in page.zhivotni %}
-                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ zhivotno }}" target="_blank">{{
+                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ zhivotno }}" target="_blank" rel="noopener">{{
                             zhivotno }}</a></li>
                         {% endfor %}
                       </ul>
@@ -77,7 +77,7 @@
                       <h2 class="section-title">Јадења</h2>
                       <ul class="list-unstyled">
                         {% for jadenje in page.jadenja %}
-                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ jadenje }}" target="_blank">{{
+                        <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ jadenje }}" target="_blank" rel="noopener">{{
                             jadenje }}</a></li>
                         {% endfor %}
                       </ul>
