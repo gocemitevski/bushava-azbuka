@@ -19,6 +19,7 @@ $(document).ready(function (e) {
   if (isUnmuted == undefined) {
     localStorage.setItem('isUnmuted', 0);
   } else{
+    // This will not work in browsers that block autoplay!
     if (isUnmuted == '1'){
       video.muted = !Boolean(isUnmuted);
       audioIconToggle();
