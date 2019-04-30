@@ -1,3 +1,15 @@
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function (reg) {
+        console.log('Service worker registered.', reg);
+      }).catch(function (err) {
+        console.log('Service worker registration failed: ', err);
+      })
+  });
+}
+
 $(document).ready(function (e) {
 
   var audio = document.getElementById("audio");
