@@ -3,19 +3,21 @@
 {% include head.html %}
 
 <body>
-  {% include navbar.html %}
-  <div class="bg-white">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-10 offset-xl-1">
-          <main id="content" class="empty">
-            {{ content }}
-          </main>
+  <div class="wrapper">
+    {% include navbar.html %}
+    <div class="bg-white">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-10 offset-xl-1">
+            <main id="content" class="empty">
+              {{ content }}
+            </main>
+          </div>
         </div>
       </div>
     </div>
+    {% include footer.html %}
   </div>
-  {% include footer.html %}
   {% include modals.html %}
   {% include shpica.html %}
   {% include scripts.html %}
