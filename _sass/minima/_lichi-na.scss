@@ -3,6 +3,26 @@
     &:after {
       content: ":";
     }
+
+  }
+
+  .section-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  @include media-breakpoint-down(md) {
+    .section-wrapper {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+
+      .btn-video{
+        order: -1;
+        margin: auto auto $spacer*2;
+      }
+    }
   }
 
   @include media-breakpoint-up(xl) {
