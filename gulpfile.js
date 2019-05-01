@@ -12,7 +12,7 @@ gulp.task('js', function () {
 
 // Watch for file changes
 gulp.task('watch', function () {
-  gulp.watch(['assets/js/**/*.scss'], gulp.parallel('js'));
+  gulp.watch(['assets/js/**/*.js'], gulp.parallel('js'));
 });
 
 // The default Gulp.js task
