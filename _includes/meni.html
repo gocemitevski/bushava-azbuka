@@ -1,7 +1,7 @@
 <ul class="navbar-nav mx-auto">
   {% for bukva in site.bukvi %}
   <li class="nav-item {% if page.url == bukva.url %}active{% endif %}">
-    <a class="nav-link" href="{{ bukva.url }}">
+    <a class="nav-link" href="{{ site.url }}/{{ bukva.url }}">
       {{ bukva.golema_bukva }}
     </a>
   </li>
