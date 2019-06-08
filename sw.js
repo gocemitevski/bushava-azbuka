@@ -10,8 +10,6 @@ var resourcesToCache = [
   siteURL + '/assets/js/popper.min.js',
   siteURL + '/assets/js/bootstrap.min.js',
   siteURL + '/assets/js/content.js',
-  siteURL + '/assets/sliki/bushava-azbuka-128x128.png',
-  siteURL + '/assets/sliki/bushava-azbuka-256x256.png',
   siteURL + '/assets/sliki/bushava-azbuka-512x512.png',
   siteURL + '/assets/sliki/bushava-azbuka-avijatichar.png',
   siteURL + '/assets/sliki/bushava-azbuka-boks.png',
@@ -54,7 +52,7 @@ var resourcesToCache = [
 ];
 
 self.addEventListener('install', function (event) {
-  console.log('Service Worker - Install event!');
+  // console.log('Service Worker - Install event!');
   event.waitUntil(
     caches.open(cacheName)
       .then(function (cache) {
@@ -64,11 +62,11 @@ self.addEventListener('install', function (event) {
 })
 
 self.addEventListener('activate', function (event) {
-  console.log('Service Worker - Activate event!');
+  // console.log('Service Worker - Activate event!');
 })
 
 self.addEventListener('fetch', function (event) {
-  console.log('Fetch intercepted for:', event.request.url);
+  // console.log('Fetch intercepted for:', event.request.url);
   event.respondWith(caches.match(event.request)
     .then(function (cacheResponse) {
       return cacheResponse || fetch(event.request);
