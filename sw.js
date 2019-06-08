@@ -2,7 +2,7 @@ var cacheName = 'cache-v1';
 var siteURL = 'https://gocemitevski.github.io/bushava-azbuka'
 var resourcesToCache = [
   siteURL + '/',
-  siteURL + 'index.html',
+  siteURL + '/index.html',
   siteURL + '/assets/main.css',
   // '/assets/video/bushava-azbuka-najavna-shpica.mp4',
   // '/assets/video/bushava-azbuka-najavna-shpica.webm',
