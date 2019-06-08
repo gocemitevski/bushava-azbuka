@@ -123,7 +123,7 @@ $(window).on("popstate", function (e) {
 
   $.each($('.navbar-nav .nav-link'), function (key, el) {
 
-    if ($(el).attr('href') == e.originalEvent.currentTarget.location.pathname) {
+    if ($(el).attr('href') == e.originalEvent.currentTarget.location.href) {
       $(el).parent().addClass('active');
     } else {
       $(el).parent().removeClass('active');
