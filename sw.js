@@ -1,4 +1,8 @@
-var cacheName = 'cache-v1';
+---
+---
+// ^ Required formatting marks for loading Liquid/Jekyll variables within JS
+
+var cacheName = 'cache-{{ site.time | date: "%Y-%m-%d" }}';
 var siteURL = 'https://gocemitevski.github.io/bushava-azbuka'
 var resourcesToCache = [
   siteURL + '/',
