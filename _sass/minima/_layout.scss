@@ -49,17 +49,24 @@ main {
   font-size: $font-size-lg;
   flex-direction: row;
 
+  .nav-item {
+    &.active {
+      .nav-link {
+        @include navlink-hover($opacity: 15%);
+      }
+    }
+  }
+
   .nav-link {
     &:hover {
-      background-color: lighten($banana, 8%);
-      border-radius: 50%;
+      @include navlink-hover;
     }
   }
 
   @include media-breakpoint-down(lg) {
 
     .nav-link {
-      padding: $spacer*0.75 $spacer*1.5;
+      padding: $spacer*.75 $spacer*1.5;
     }
   }
 }
@@ -133,7 +140,7 @@ main {
   background: $gray-600;
 }
 
-.btn-install{
+.btn-install {
   display: none;
   position: fixed;
   bottom: $spacer;
