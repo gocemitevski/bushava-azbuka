@@ -127,8 +127,16 @@ main {
   color: $white;
   width: $spacer*7;
   height: $spacer*7;
-  margin-right: $spacer/2;
-  margin-left: $spacer/2;
+
+  @include media-breakpoint-up(md) {
+    margin-right: $spacer;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-left: $spacer/2;
+    margin-right: $spacer/2;
+  }
+
   font-weight: $font-weight-bold;
   align-self: flex-end;
 }
