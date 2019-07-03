@@ -8,8 +8,8 @@ var resourcesToCache = [
   siteURL + '/',
   siteURL + '/index.html',
   siteURL + '/assets/main.css',
-  // '/assets/video/bushava-azbuka-najavna-shpica.mp4',
-  // '/assets/video/bushava-azbuka-najavna-shpica.webm',
+  siteURL + '/assets/video/bushava-azbuka-najavna-shpica.mp4',
+  siteURL + '/assets/video/bushava-azbuka-najavna-shpica.webm',
   siteURL + '/assets/js/jquery.min.js',
   siteURL + '/assets/js/popper.min.js',
   siteURL + '/assets/js/bootstrap.min.js',
@@ -67,6 +67,17 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('activate', function (event) {
   // console.log('Service Worker - Activate event!');
+
+  event.waitUntil(
+    caches.keys().then(function (keyList) {
+      return Promise.all(keyList.map(function (key) {
+        if (cacheName.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      })
+      )
+    })
+  )
 })
 
 self.addEventListener('fetch', function (event) {
