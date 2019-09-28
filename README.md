@@ -27,6 +27,18 @@
 
 Презентацијата претставува т.н. прогресивна веб-апликација, така што лесно може да се инсталира како мобилна апликација на телефони, таблети и останати уреди што користат iOS или Android.
 
+### Компресија на видео содржини
+
+Најавната шпица на „Бушава азбука“ е компресирана со `ffmpeg` во видео форматите `H264` и `Webm` со следните команди:
+
+#### `H264`
+
+`ffmpeg -i bushava-azbuka-najavna-shpica-izvor.mp4 -crf 30 -b:a 96k -c:a libvorbis -ar 32000 bushava-azbuka-najavna-shpica.mp4`
+
+#### `Webm`
+
+`ffmpeg -i bushava-azbuka-najavna-shpica-izvor.mp4 -c:v libvpx-vp9 -crf 50 -b:a 96k -c:a libvorbis -ar 32000 bushava-azbuka-najavna-shpica.webm`
+
 ## Пријава на грешки
 
 Доколку забележите нешто скршено или некаков проблем, ве молам пријавете преку https://github.com/gocemitevski/bushava-azbuka/issues.
