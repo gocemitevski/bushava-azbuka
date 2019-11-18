@@ -15,6 +15,8 @@ var resourcesToCache = [
   siteURL + '/assets/js/bootstrap.min.js',
   siteURL + '/assets/js/content.js',
   siteURL + '/assets/sliki/bushava-azbuka-512x512.png',
+  siteURL + '/assets/sliki/bushava-azbuka-192x192.png',
+  siteURL + '/assets/sliki/bushava-azbuka-192x192-ios.png',
   siteURL + '/assets/sliki/bushava-azbuka-avijatichar.png',
   siteURL + '/assets/sliki/bushava-azbuka-boks.png',
   siteURL + '/assets/sliki/bushava-azbuka-cel.png',
