@@ -4,6 +4,7 @@
     url('free-serif/FreeSerifBold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
     url('free-serif/FreeSerif.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -20,6 +22,7 @@
     url('free-serif/FreeSerifItalic.woff') format('woff');
   font-weight: normal;
   font-style: oblique;
+  font-display: swap;
 }
 
 @font-face {
@@ -28,4 +31,5 @@
     url('free-serif/FreeSerifBoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: oblique;
+  font-display: swap;
 }
