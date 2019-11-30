@@ -6,8 +6,39 @@ var cacheName = 'cache-{{ site.time | date: "%Y-%m-%d" }}';
 var siteURL = 'https://gocemitevski.github.io/bushava-azbuka'
 var resourcesToCache = [
   siteURL + '/',
-  siteURL + '/favicon.ico',
   siteURL + '/index.html',
+  siteURL + '/bukvi/01-а.html',
+  siteURL + '/bukvi/02-б.html',
+  siteURL + '/bukvi/03-в.html',
+  siteURL + '/bukvi/04-г.html',
+  siteURL + '/bukvi/05-д.html',
+  siteURL + '/bukvi/06-ѓ.html',
+  siteURL + '/bukvi/07-е.html',
+  siteURL + '/bukvi/08-ж.html',
+  siteURL + '/bukvi/09-з.html',
+  siteURL + '/bukvi/10-ѕ.html',
+  siteURL + '/bukvi/11-и.html',
+  siteURL + '/bukvi/12-ј.html',
+  siteURL + '/bukvi/13-к.html',
+  siteURL + '/bukvi/14-л.html',
+  siteURL + '/bukvi/15-љ.html',
+  siteURL + '/bukvi/16-м.html',
+  siteURL + '/bukvi/17-н.html',
+  siteURL + '/bukvi/18-њ.html',
+  siteURL + '/bukvi/19-о.html',
+  siteURL + '/bukvi/20-п.html',
+  siteURL + '/bukvi/21-р.html',
+  siteURL + '/bukvi/22-с.html',
+  siteURL + '/bukvi/23-т.html',
+  siteURL + '/bukvi/24-ќ.html',
+  siteURL + '/bukvi/25-у.html',
+  siteURL + '/bukvi/26-ф.html',
+  siteURL + '/bukvi/27-х.html',
+  siteURL + '/bukvi/28-ц.html',
+  siteURL + '/bukvi/29-ч.html',
+  siteURL + '/bukvi/30-џ.html',
+  siteURL + '/bukvi/31-ш.html',
+  siteURL + '/favicon.ico',
   siteURL + '/assets/main.css',
   // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.mp4',
   // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.webm',
@@ -86,17 +117,8 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((resp) => {
-      return resp || fetch(event.request).then((response) => {
-        let responseClone = response.clone();
-        caches.open(cacheName).then((cache) => {
-          cache.put(event.request, responseClone);
-        });
-
-        return response;
-      });
-    }).catch(() => {
-      return caches.match(siteURL + '/assets/sliki/bushava-azbuka-512x512.png');
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
     })
   );
 });
