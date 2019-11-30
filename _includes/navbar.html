@@ -9,13 +9,22 @@
     <span class="sr-only">музика</span>
   </button>
 </div>
-<nav class="navbar sticky-top navbar-expand-md navbar-light bg-banana">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Прикажи мени">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar flex-nowrap justify-content-between sticky-top navbar-expand-md navbar-light bg-banana">
+  {% if page.layout == 'bukva' %}
+  <a rel="previous" href="{{ site.url }}{{ page.previous.url }}" class="btn btn-lg btn-outline-secondary">&laquo;</a>
+  {% endif %}
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    {% include meni.html %}
+  <div class="d-flex flex-column mx-auto px-3">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Прикажи мени">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {% include meni.html %}
+    </div>
   </div>
+
+  {% if page.layout == 'bukva' %}
+  <a rel="next" href="{{ site.url }}{{ page.next.url }}" class="btn btn-lg btn-outline-secondary">&raquo;</a>
+  {% endif %}
 </nav>
