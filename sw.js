@@ -6,6 +6,7 @@ var cacheName = 'cache-{{ site.time | date: "%Y-%m-%d" }}';
 var siteURL = 'https://gocemitevski.github.io/bushava-azbuka'
 var resourcesToCache = [
   siteURL + '/',
+  siteURL + '/favicon.ico',
   siteURL + '/index.html',
   siteURL + '/assets/main.css',
   // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.mp4',
