@@ -14,5 +14,13 @@
   <meta name="twitter:creator" content="@GoceMitevski">
   <meta name="twitter:title" content="{% include title.html %}">
   <meta property="og:image" content="{% include og-image.html %}">
-  {% include google-analytics.html %}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9757FRP49Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-9757FRP49Q');
+  </script>
 </head>
