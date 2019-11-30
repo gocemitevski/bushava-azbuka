@@ -18,7 +18,7 @@ email: goce.mitevski@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Бушава азбука / Горан Стефановски ; [илустрирал] Душан Петричиќ. – Скопје : Детска Радост, 1986. – 64 стр. : илустр. (делумно во бои) ; 23 x 28 см. – (Библиотека Росица)
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://gocemitevski.github.io/bushava-azbuka" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: gocemitevski
 github_username:  gocemitevski
 ga_ua: G-9757FRP49Q
