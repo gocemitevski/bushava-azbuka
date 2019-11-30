@@ -27,12 +27,18 @@ ga_ua: G-9757FRP49Q
 markdown: kramdown
 theme: minima
 plugins:
+  - jekyll-pwa-plugin
 exclude:
   - Gemfile
   - Gemfile.lock
+  - node_modules
 sass:
   sass_dir: _sass
   style: compressed
 collections:
   bukvi:
     output: true
+pwa:
+  sw_src_filepath: sw.js # Optional
+  sw_dest_filename: sw.js # Optional
+  dest_js_directory: assets/js # Required
