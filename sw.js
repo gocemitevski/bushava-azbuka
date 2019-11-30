@@ -10,6 +10,7 @@ var resourcesToCache = [
   siteURL + '/assets/main.css',
   // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.mp4',
   // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.webm',
+  siteURL + '/assets/video/bushava-azbuka-najavna-shpica-poster.jpg',
   siteURL + '/assets/js/jquery.min.js',
   siteURL + '/assets/js/popper.min.js',
   siteURL + '/assets/js/bootstrap.min.js',
