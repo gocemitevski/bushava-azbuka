@@ -11,7 +11,7 @@
         <main id="content">
           <div class="row h-100 justify-content-between">
             <div class="col-3 col-sm-1 d-flex justify-content-center align-items-start">
-              <a rel="previous" href="{{ page.previous.url }}"
+              <a rel="previous" href="{{ site.url }}{{ page.previous.url }}"
                 class="btn btn-outline-secondary btn-prev">&laquo;</a>
             </div>
             <div class="col-sm-10 order-2 order-sm-1">
@@ -111,7 +111,7 @@
               </section>
             </div>
             <div class="col-3 col-sm-1 order-1 order-sm-2 d-flex justify-content-center align-items-start">
-              <a rel="next" href="{{ page.next.url }}" class="btn btn-outline-secondary btn-next">&raquo;</a>
+              <a rel="next" href="{{ site.url }}{{ page.next.url }}" class="btn btn-outline-secondary btn-next">&raquo;</a>
             </div>
           </div>
           <div class="modal fade" tabindex="-1" role="dialog" id="videoEpizoda">
