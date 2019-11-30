@@ -8,10 +8,14 @@
     {% include navbar.html %}
     <div class="bg-white">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-xl-10 offset-xl-1">
-            <main id="content">
-              <div class="row h-100">
+        <main id="content">
+          <div class="row h-100 justify-content-between">
+            <div class="col-3 col-sm-1 d-flex justify-content-center align-items-start">
+              <a rel="previous" href="{{ page.previous.url }}"
+                class="btn btn-outline-secondary btn-prev">&laquo;</a>
+            </div>
+            <div class="col-sm-10 order-2 order-sm-1">
+              <div class="row">
                 <div class="col-xl-6">
                   <section class="section-wrapper lichi-na">
                     <div class="section-wrapper">
@@ -47,7 +51,7 @@
                       <section class="section-wrapper iminja">
                         <h2 class="section-title">{% if page.mala_bukva == 'ч' or page.mala_bukva == 'ш' %}(<span
                             class="prefix">през</span>){%
-                        endif %}Имиња</h2>
+                                endif %}Имиња</h2>
                         <ul class="list-inline">
                           {% for ime in page.iminja %}
                           <li class="h5 list-inline-item">{{ ime }}</li>
@@ -62,7 +66,7 @@
                           {% for rastenie in page.rastenija %}
                           <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ rastenie }}" target="_blank"
                               rel="noopener">{{
-                            rastenie }}</a></li>
+                                    rastenie }}</a></li>
                           {% endfor %}
                         </ul>
                       </section>
@@ -74,7 +78,7 @@
                           {% for zhivotno in page.zhivotni %}
                           <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ zhivotno }}" target="_blank"
                               rel="noopener">{{
-                            zhivotno }}</a></li>
+                                    zhivotno }}</a></li>
                           {% endfor %}
                         </ul>
                       </section>
@@ -84,7 +88,7 @@
                           {% for jadenje in page.jadenja %}
                           <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ jadenje }}" target="_blank"
                               rel="noopener">{{
-                            jadenje }}</a></li>
+                                    jadenje }}</a></li>
                           {% endfor %}
                         </ul>
                       </section>
@@ -105,35 +109,38 @@
                 <img class="img-fluid w-100" src="{{ site.url }}/{{ page.sliki[0] }}"
                   alt="{{ page.name }} &ndash; буква {{ page.golema_bukva }} &mdash; {{ site.title }}">
               </section>
-              <div class="modal fade" tabindex="-1" role="dialog" id="videoEpizoda">
-                <div class="modal-dialog modal-xl" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title"><span class="text-uppercase">{{ site.title }}</span> &ndash; буква {{
+            </div>
+            <div class="col-3 col-sm-1 order-1 order-sm-2 d-flex justify-content-center align-items-start">
+              <a rel="next" href="{{ page.next.url }}" class="btn btn-outline-secondary btn-next">&raquo;</a>
+            </div>
+          </div>
+          <div class="modal fade" tabindex="-1" role="dialog" id="videoEpizoda">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><span class="text-uppercase">{{ site.title }}</span> &ndash; буква {{
                         page.golema_bukva }}</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Затвори">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Затвори">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <section class="section-wrapper videa">
+                    <h2 class="sr-only">Видеo</h2>
+                    {% for video in page.videa %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <div id="videoPlaceholder" data-src="{{ video }}?autoplay=1"></div>
                     </div>
-                    <div class="modal-body">
-                      <section class="section-wrapper videa">
-                        <h2 class="sr-only">Видеo</h2>
-                        {% for video in page.videa %}
-                        <div class="embed-responsive embed-responsive-16by9">
-                          <div id="videoPlaceholder" data-src="{{ video }}?autoplay=1"></div>
-                        </div>
-                        {% endfor %}
-                      </section>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Затвори</button>
-                    </div>
-                  </div>
+                    {% endfor %}
+                  </section>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Затвори</button>
                 </div>
               </div>
-            </main>
+            </div>
           </div>
-        </div>
+        </main>
         {% include footer.html %}
       </div>
     </div>
