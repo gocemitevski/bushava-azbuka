@@ -23,6 +23,6 @@ workbox.routing.registerRoute(
 
 // use `cacheFirst` strategy for images
 workbox.routing.registerRoute(
-  /assets\/(sliki|free-serif)/,
+  /assets\/(sliki|free-serif|video)/,
   workbox.strategies.cacheFirst()
 );
