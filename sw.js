@@ -9,8 +9,8 @@ var resourcesToCache = [
   siteURL + '/favicon.ico',
   siteURL + '/index.html',
   siteURL + '/assets/main.css',
-  // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.mp4',
-  // siteURL + '/assets/video/bushava-azbuka-najavna-shpica.webm',
+  siteURL + '/assets/video/bushava-azbuka-najavna-shpica.mp4',
+  siteURL + '/assets/video/bushava-azbuka-najavna-shpica.webm',
   siteURL + '/assets/video/bushava-azbuka-najavna-shpica-poster.jpg',
   siteURL + '/assets/js/jquery.min.js',
   siteURL + '/assets/js/popper.min.js',
@@ -84,11 +84,19 @@ self.addEventListener('activate', function (event) {
   )
 })
 
-self.addEventListener('fetch', function (event) {
-  // console.log('Fetch intercepted for:', event.request.url);
-  event.respondWith(caches.match(event.request)
-    .then(function (cacheResponse) {
-      return cacheResponse || fetch(event.request);
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((resp) => {
+      return resp || fetch(event.request).then((response) => {
+        let responseClone = response.clone();
+        caches.open('v1').then((cache) => {
+          cache.put(event.request, responseClone);
+        });
+
+        return response;
+      });
+    }).catch(() => {
+      return caches.match(siteURL + '/assets/sliki/bushava-azbuka-512x512.png');
     })
-  )
-})
+  );
+});
