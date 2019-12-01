@@ -6,7 +6,12 @@
 }
 
 main {
-  margin: $spacer*4 auto;
+  margin-top: $spacer*2;
+  margin-bottom: $spacer*2;
+
+  @include media-breakpoint-up(xl) {
+    margin: $spacer*4 auto;
+  }
 
   &.empty {
     margin: initial;
