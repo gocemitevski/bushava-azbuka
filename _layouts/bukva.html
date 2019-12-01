@@ -10,22 +10,26 @@
       <div class="container-fluid">
         <main id="content">
           <div class="row h-100 justify-content-between">
-            <div class="col-3 col-sm-2 d-flex justify-content-center align-items-start">
+            <div class="col-3 col-sm-2 col-lg-1 d-flex justify-content-center align-items-start">
               <a rel="previous" href="{{ site.url }}{{ page.previous.url }}"
                 class="btn btn-outline-secondary btn-prev">&laquo;</a>
             </div>
-            <div class="col-sm-8 order-2 order-sm-1">
+            <div class="col-sm-8 col-lg-10 order-2 order-sm-1">
               <div class="row">
                 <div class="col-xl-6">
                   <section class="section-wrapper lichi-na">
-                    <div class="section-wrapper">
-                      <header class="d-flex flex-wrap">
-                        <h1 class="box box-lg"><span>{{ page.golema_bukva }}</span></h1>
-                        <h2 class="box box-sm"><span>{{ page.mala_bukva }}</span></h2>
-                      </header>
-                      <h2 class="section-title my-0 mx-2">Личи на</h2>
-                      <button type="button" class="btn btn-outline-secondary btn-video" data-toggle="modal"
+                    <div class="section-wrapper justify-content-between no-gutters">
+                      <div class="order-1 order-xl-0 col-xl-9 d-flex flex-wrap align-items-end">
+                        <header class="d-flex">
+                          <h1 class="box box-lg"><span>{{ page.golema_bukva }}</span></h1>
+                          <h2 class="box box-sm"><span>{{ page.mala_bukva }}</span></h2>
+                        </header>
+                        <h2 class="section-title my-0 mx-2">Личи на</h2>
+                      </div>
+                      <div class="order-0 order-xl-1 col-xl-3 d-flex align-items-center align-self-start">
+                        <button type="button" class="btn btn-outline-secondary btn-video" data-toggle="modal"
                         data-target="#videoEpizoda">видео</button>
+                      </div>
                     </div>
                     <ul class="list-unstyled">
                       {% for opis in page.lichi_na %}
@@ -110,7 +114,7 @@
                   alt="{{ page.name }} &ndash; буква {{ page.golema_bukva }} &mdash; {{ site.title }}">
               </section>
             </div>
-            <div class="col-3 col-sm-2 order-1 order-sm-2 d-flex justify-content-center align-items-start">
+            <div class="col-3 col-sm-2 col-lg-1 order-1 order-sm-2 d-flex justify-content-center align-items-start">
               <a rel="next" href="{{ site.url }}{{ page.next.url }}" class="btn btn-outline-secondary btn-next">&raquo;</a>
             </div>
           </div>
