@@ -15,8 +15,6 @@
   @include media-breakpoint-down(md) {
     .section-wrapper {
       flex-direction: column;
-      text-align: center;
-      align-items: center;
 
       .btn-video{
         order: -1;
