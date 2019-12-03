@@ -76,6 +76,19 @@ $(document).ready(function (e) {
     }
   });
 
+  $(".btn-nav").on('click', function (e) {
+    // Stop link from activating
+    e.preventDefault();
+
+    markNavItem($('.navbar-nav .nav-link[href="' + this.href + '"]'));
+
+    // Get the URL to load
+    url = $(this).attr('href');
+
+    switchLetter(url);
+
+  });
+
   $(".navbar-nav .nav-link").on('click', function (e) {
 
     // Stop link from activating
@@ -86,30 +99,7 @@ $(document).ready(function (e) {
     // Get the URL to load
     url = $(this).attr('href');
 
-    // Send a Get request to the URL
-    $.get(url, function (data) {
-
-      // Get the title of the new page
-      var newTitle = $(data).filter('title').html();
-
-      // Set the title to the new title
-      $('title').html(newTitle);
-
-      // Replace the content
-      $('#content').html($(data).find('#content').html());
-
-      // Push a new state to the browser
-      history.pushState({
-        'title': $('title').html(),
-        'content': $('#content').removeClass('empty').html()
-      }, newTitle, url);
-
-      modalCreate();
-      modalDestroy();
-
-    });
-
-    $('#navbarSupportedContent').collapse('hide');
+    switchLetter(url);
 
   });
 
@@ -201,4 +191,31 @@ function audioIconToggle() {
 
   audio.classList.toggle("on");
 
+}
+
+function switchLetter(url) {
+  // Send a Get request to the URL
+  $.get(url, function (data) {
+
+    // Get the title of the new page
+    var newTitle = $(data).filter('title').html();
+
+    // Set the title to the new title
+    $('title').html(newTitle);
+
+    // Replace the content
+    $('#content').html($(data).find('#content').html());
+
+    // Push a new state to the browser
+    history.pushState({
+      'title': $('title').html(),
+      'content': $('#content').removeClass('empty').html()
+    }, newTitle, url);
+
+    modalCreate();
+    modalDestroy();
+
+  });
+
+  $('#navbarSupportedContent').collapse('hide');
 }
