@@ -59,6 +59,23 @@ $(document).ready(function (e) {
     }
   }*/
 
+  $('.btn-share').on('click', function () {
+    if (navigator.share) {
+      // Show icon only on browsers that support navigator.share
+      this.removeClass('d-none');
+
+      navigator.share({
+        title: document.title,
+        text: $("meta[name='description']").attr('content'),
+        url: document.location,
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    } else {
+      alert('Извинете, вашиот прелистувач не ја поддржува оваа можност.')
+    }
+  });
+
   $(".navbar-nav .nav-link").on('click', function (e) {
 
     // Stop link from activating
