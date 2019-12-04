@@ -48,6 +48,7 @@ $(document).ready(function (e) {
   var audio = document.getElementById("audio");
   var video = document.getElementById("video");
   var isUnmuted = localStorage.getItem('isUnmuted');
+  var buttonShare = $('.btn-share');
 
   if (isUnmuted == undefined) {
     localStorage.setItem('isUnmuted', 0);
@@ -59,11 +60,12 @@ $(document).ready(function (e) {
     }
   }*/
 
-  $('.btn-share').on('click', function () {
-    if (navigator.share) {
-      // Show icon only on browsers that support navigator.share
-      $(this).removeClass('d-none');
+  if (navigator.share) {
+    buttonShare.removeClass('d-none');
+  }
 
+  buttonShare.on('click', function () {
+    if (navigator.share) {
       navigator.share({
         title: document.title,
         text: $("meta[name='description']").attr('content'),
