@@ -80,12 +80,9 @@ $(document).ready(function (e) {
     // Stop link from activating
     e.preventDefault();
 
-    markNavItem($('.navbar-nav .nav-link[href="' + this.href + '"]'));
+    markNavItem($('.navbar-nav .nav-link[href="' + $(e.target).attr('href') + '"]'));
 
-    // Get the URL to load
-    url = $(this).attr('href');
-
-    switchLetter(url);
+    switchLetter($(e.target).attr('href'));
 
   });
 
@@ -194,6 +191,7 @@ function audioIconToggle() {
 }
 
 function switchLetter(url) {
+
   // Send a Get request to the URL
   $.get(url, function (data) {
 
