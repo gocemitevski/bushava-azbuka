@@ -62,7 +62,7 @@ $(document).ready(function (e) {
   $('.btn-share').on('click', function () {
     if (navigator.share) {
       // Show icon only on browsers that support navigator.share
-      this.removeClass('d-none');
+      $(this).removeClass('d-none');
 
       navigator.share({
         title: document.title,
