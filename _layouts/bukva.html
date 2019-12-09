@@ -3,6 +3,19 @@
 {% include head.html %}
 {% assign search_url = 'https://www.google.com/search?q=' %}
 
+{% if page.previous %}
+{% assign previous = page.previous %}
+{% else %}
+{% assign last lastPostIndex = site.bukvi | size | minus: 1 %}
+{% assign previous = site.bukvi[lastPostIndex] %}
+{% endif %}
+
+{% if page.next %}
+{% assign next = page.next %}
+{% else %}
+{% assign next = site.bukvi[0] %}
+{% endif %}
+
 <body>
   <div class="wrapper">
     {% include navbar.html %}
@@ -11,7 +24,7 @@
         <main id="content">
           <div class="row h-100 justify-content-between">
             <div class="col-3 col-sm-2 col-lg-1 d-flex justify-content-center align-items-start">
-              <a rel="previous" href="{{ site.url }}{{ page.previous.url }}"
+              <a rel="previous" href="{{ site.url }}{{ previous.url }}"
                 class="btn btn-outline-secondary btn-nav btn-prev">&laquo;</a>
             </div>
             <div class="col-sm-8 col-lg-10 order-2 order-sm-1">
@@ -19,7 +32,8 @@
                 <div class="col-xl-6">
                   <section class="section-wrapper lichi-na">
                     <div class="section-wrapper justify-content-between no-gutters">
-                      <div class="order-1 order-xl-0 col-xl-9 d-flex flex-wrap align-items-end justify-content-center justify-content-md-start">
+                      <div
+                        class="order-1 order-xl-0 col-xl-9 d-flex flex-wrap align-items-end justify-content-center justify-content-md-start">
                         <header class="d-flex">
                           <h1 class="box box-lg"><span>{{ page.golema_bukva }}</span></h1>
                           <h2 class="box box-sm"><span>{{ page.mala_bukva }}</span></h2>
@@ -28,7 +42,7 @@
                       </div>
                       <div class="order-0 order-xl-1 col-xl-3 d-flex align-items-center align-self-start">
                         <button type="button" class="btn btn-outline-secondary btn-video" data-toggle="modal"
-                        data-target="#videoEpizoda">видео</button>
+                          data-target="#videoEpizoda">видео</button>
                       </div>
                     </div>
                     <ul class="list-unstyled">
@@ -115,7 +129,8 @@
               </section>
             </div>
             <div class="col-3 col-sm-2 col-lg-1 order-1 order-sm-2 d-flex justify-content-center align-items-start">
-              <a rel="next" href="{{ site.url }}{{ page.next.url }}" class="btn btn-outline-secondary btn-nav btn-next">&raquo;</a>
+              <a rel="next" href="{{ site.url }}{{ next.url }}"
+                class="btn btn-outline-secondary btn-nav btn-next">&raquo;</a>
             </div>
           </div>
           <div class="modal fade" tabindex="-1" role="dialog" id="videoEpizoda">

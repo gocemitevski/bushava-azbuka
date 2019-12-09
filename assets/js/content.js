@@ -78,13 +78,16 @@ $(document).ready(function (e) {
     }
   });
 
-  $(".btn-nav").on('click', function (e) {
+  $(document).on('click', '.btn-nav', function (e) {
+
     // Stop link from activating
     e.preventDefault();
 
-    markNavItem($('.navbar-nav .nav-link[href="' + $(e.target).attr('href') + '"]'));
+    var url = $(e.target).attr('href');
 
-    switchLetter($(e.target).attr('href'));
+    switchLetter(url);
+
+    return false;
 
   });
 
@@ -197,14 +200,21 @@ function switchLetter(url) {
   // Send a Get request to the URL
   $.get(url, function (data) {
 
+    // Don't reload current letter
+    if (url == document.location) {
+      return;
+    }
+
     // Get the title of the new page
     var newTitle = $(data).filter('title').html();
-
     // Set the title to the new title
     $('title').html(newTitle);
 
     // Replace the content
     $('#content').html($(data).find('#content').html());
+
+    // Mark current letter in main navigation
+    markNavItem($(document).find('.navbar-nav').find('.nav-link[href="' + url + '"]'));
 
     // Push a new state to the browser
     history.pushState({
@@ -215,7 +225,8 @@ function switchLetter(url) {
     modalCreate();
     modalDestroy();
 
+    $('#navbarSupportedContent').collapse('hide');
+
   });
 
-  $('#navbarSupportedContent').collapse('hide');
 }
