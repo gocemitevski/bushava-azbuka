@@ -214,7 +214,7 @@ function switchLetter(url) {
     $('#content').html($(data).find('#content').html());
 
     // Mark current letter in main navigation
-    markNavItem($(document).find('.navbar-nav').find('.nav-link[href="' + url + '"]'));
+    markNavItem($('.navbar-nav .nav-link[href="' + url + '"]'));
 
     // Push a new state to the browser
     history.pushState({
