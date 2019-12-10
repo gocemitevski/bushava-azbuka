@@ -1,3 +1,12 @@
 @mixin navlink-hover($opacity: 8%) {
   background-color: lighten($banana, $opacity);
 }
+
+@mixin svg-icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
