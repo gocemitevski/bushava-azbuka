@@ -16,7 +16,7 @@
 {% assign next = site.bukvi[0] %}
 {% endif %}
 
-<body>
+<body itemscope itemtype="http://schema.org/Book">
   <div class="wrapper">
     {% include navbar.html %}
     <div class="bg-white">
@@ -124,7 +124,7 @@
               </section>
               <section class="section-wrapper sliki">
                 <h2 class="sr-only">Слики</h2>
-                <img class="img-fluid w-100" loading="lazy" src="{{ site.url }}/{{ page.sliki[0] }}"
+                <img itemprop="image" class="img-fluid w-100" loading="lazy" src="{{ site.url }}/{{ page.sliki[0] }}"
                   alt="{{ page.name }} &ndash; буква {{ page.golema_bukva }} &mdash; {{ site.title }}">
               </section>
             </div>
