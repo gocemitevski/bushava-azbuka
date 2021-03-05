@@ -17,17 +17,18 @@ supports the largest number of writing scripts.  However there are writing
 scripts supported by the sans-serif but not by serif.
 
 For an overview of which scripts and sets of symbols are supported by
-which face, see the FreeFont 'coverage' web page.
+which face, see the GNU FreeFont 'coverage' web page.
 
 Font features
 =============
 
-FreeFont has numerous font "features" that perform alterations to the basic
+The fonts have numerous font "features" that perform alterations to the basic
 letters of the font, replacing them with other letters, or positioning them
 with respect to other letters.
 
 Many features are activated automatically, but in some environments, they
 present some user control.  This documents those features with user control.
+The file "features.txt" goes into more detail.
 
 Language-specific features
 ==========================
@@ -68,10 +69,15 @@ South Slavic	(Bosnian, Macedonian, Serbian)
 	localized form of 'be', and others in italic
 	[the 'sha' with line below is available as a character variant ]
 Bulgarian	style set for modern alternative glyphs
+Bulgarian and South Slavic: latin form of jest (iotified e U+0464,5)
 
 Hebrew
 ------
 Yiddish	raised vowels under yo
+
+Thai
+----
+Proportional and fixed-width numerals: 'tnum', 'lnum', 'pnum'.
 
 Devanagari
 ----------
@@ -94,9 +100,28 @@ Sanskrit	larger and different set of ligatures
 
 Malayalam
 ---------
-Both the classical and reformed scripts are supported.  The default 
-is the classical script.  The reformed script is enabled by setting the
-OpenType language tag 'MLR '.
+Both the classical and reformed scripts are supported.  The default is the
+classical script.  The reformed script is enabled by specifying the
+OpenType Style Set 'ss19'.
+
+In LaTeX fontspec package, reformed orthography is available as 
+"Language=Malayalam Reformed".  See below.
+
+Many consonant conjunct forms that are not displayed by default are 
+available using the ZWJ character as described in the Unicode standard.
+These extra forms are of the subscript fashion, where the subscript is one
+of the letters 
+	ka kha ga ca cha ja tta ttha dda nna ta da dha
+	na pa pha ba bha ma ra rra la va sha sa ha_mal
+ro the ligatures
+	kaka tata 
+
+The feature "cv20" produces a post-base -ya that extends beneath preceeding 
+letter, if the letter permits it.  The feature "cv21" produces alternative
+forms of vowels i, ii, aa and au.
+
+The feature "hist", in text marked as Sanskrit, will produce prepausal 
+"chillu" forms.  The implementation is experimental at this time.
 
 Indic languages
 ---------------
@@ -110,6 +135,12 @@ Indic typography.
 
 By specifying the language of the text, an appropriate glyph for 'danda'
 may be obtained, and Western punctuation may be better spaced.
+
+Likewise, a space mark of appropriate width, as well as better punctuation
+marks, may be obtained by specifying the language of the text.
+
+Fixed-width numerals are available in all the Indic scripts, via the 'tnum'
+or 'lnum' features.  Proportional-width numerals are enforced with 'pnum'.
 
 Vedic marks
 -----------
@@ -164,6 +195,8 @@ Greek: (Some of these are done already by the default 'locl' feature,
 Cyrillic: in italic faces, Serbian/Macedonian underscored 'sha' (cv01)
 
 Tamil: form of 'ra' invariant with vowel marks (cv01).
+
+Kannada: Old form of dead na in Kannada.
 
 Discretionary features
 ======================
@@ -267,8 +300,8 @@ marks such as bullets and stars (ornm).
 
 Use in HTML with CSS
 ====================
-Some web browsers have lately become very typography-savvy, having long
-outstripped word processors in this regard.
+Most web browsers have lately become very typography-savvy, having long
+outstripped word processors in this regard. 
 
 In basic HTML, it is most important to properly specify the langugage of
 each text element, using HTML 'lang' attributes.  Many typographic
@@ -283,16 +316,23 @@ With CSS, the "font-family" property can be specified as one of
 	'freeserif', 'freesans' or 'freemono',
 and several other properties influencing typographic presentation can
 also be set: "font-weight", "font-style", etc.
+The standards documents are at
+	https://www.w3.org/TR/css-fonts-3/
 In CSS 3, a special property 'font-feature-settings' that gives explicit
 control of OpenType font features was introduced. 
 	https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-It is usually more appropriateto use explicit CSS 'font-variant' properties
+It is usually more appropriate to use explicit CSS 'font-variant' properties
 to reach these features.
 
 These explicit features are specific to particular fonts.  So this 
 technology is meant to work with "web fonts", a means of delivering
 a font with your web page.  See the document "webfont_guidelines.txt"
 for more information about this.
+
+A new propperty is slated to come with CSS4: font-language-override.
+This should permit the font's language tags to be accessed directly.
+However, as of this writing, few browsers have implemented it.
+
 
 Use in LaTeX
 ============
@@ -428,5 +468,16 @@ limited to font height.
 3) A few extensible arrows don't extend correctly, although others do.
 What triggers this is unknown.
 
+Use with LibreOffice
+====================
 
-$Id: usage.txt 3932 2018-06-06 21:13:06Z Stevan_White $
+Font features can be turned on in LibreOffice Writer by an arcane trick.
+In the little text box for the font name, append the desired feature setting
+to the name of the font, with a colon (:) separating the font name from the
+feature setting.  Typeing in this box
+	FreeSerif:ss19=1
+will turn Style Set 19 on.
+
+(We can hope this will be made more user-friendly in the future.)
+
+$Id: usage.txt 4134 2020-03-22 14:22:02Z Stevan_White $

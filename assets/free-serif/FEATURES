@@ -42,9 +42,10 @@ c2sc	captials to small capitals
 frac	diagonal fractions (up to 9 decimals with slash / or fraction u+2044)
 afrc	stacked fractions (with slash /)
 zero	slashed zero
+lnum	lining figures
 onum	oldstyle figures
-tnum	tablular figures
 pnum	proportional-width figures
+tnum	tablular figures
 ordn	ordinal indicators (Latin-based and English)
 
 ccmp	glyph decomposition (multiple replacement)
@@ -60,25 +61,39 @@ init	initial forms
 medi	medial forms
 fina	final formes
 
+	Thai
+	-------------
+lnum	lining figures
+pnum	proportional-width figures
+tnum	tablular figures
+
 	Indic scripts
 	-------------
 	(these are always applied in exactly the following order)
 nukt	nukta forms
 akhn	akhand
+pref	pre-base form
 rphf	reph form
 blwf	below base forms
 half	half form
 vatu	vattu variants
-pres	pre base substitutions
+pres	pre-base substitutions
 abvs	above base substitutions
 blws	below base substitutions
 psts	post base substitutions
 haln	halant forms
 
+lnum	lining figures
+pnum	proportional-width figures
+tnum	tablular figures
+
 Character Variants
 ==========
 cv01	Latin Alpha for Cameroon languages
 cv02	Insular forms of Latin letters for Old English, Welsh
+cv20	swept -ya in Malayalam
+cv21	alternative vowels in Malayalam
+cv80	old-style dead na in Kannada
 
 Style Sets
 ==========
@@ -94,6 +109,12 @@ ss11	Latin Calligraphic (TeX \mathcal)
 ss12	Fraktur
 ss13	Latin Script
 ss14	Latin Blackboard-Bold
+ss19	Malayalam Reformed
+
+Historical 'hist'
+==========
+hist	Cyrillic: old form of jest (U+0464,5 Iotified e)
+hist	Malayalam: for text marked as Sanskrit, implements prepausal forms
 
 Positioning (GPOS)
 ===========
@@ -105,8 +126,8 @@ mkmk	mark-to-mark
 	Indic scripts
 	-------------
 dist	distance (similar to kern)
-abvm	above mark
-blwm	below mark
+abvm	above mark (similar to mark)
+blwm	below mark (similar to mark)
 
 Variation Selectors
 -------------------
@@ -128,8 +149,10 @@ Many older programs have very poor support for OpenType features.
 Word processors have had surprisingly poor support.
 For some time, there has been a manual switch for kerning, and a few
 other features might work, but most are non-functional.
+In recent years, a method for activating font features has been added to
+LibreOffice.  See the USAGE file.
 
-The basic font support in modern operating systems is not bad.
+The basic font support in modern operating systems is good.
 The effect is, often a text editor makes better use of font features
 than a word processor does.
 
@@ -139,10 +162,9 @@ many OpenType features.  There are tables available on the Web
 Modern LaTeX typesetting programs, such as XeTeX and LuaTeX, have very
 good support via packages such as 'fontspec'.
 
-Web browsers are experimenting with the CSS 3 'font-feature-settings'
-property.  In recent years, nearly unified support has developed for 
-enabling font features within a web page.  Mozilla Firefox is particularly 
-strong here.
+Web browsers have generally adopted the CSS 3 'font-feature-settings'
+property to directly request font features, as well as several 'font-variant'
+properties that do the same thing.
 
 Note that it is necessary to correctly indicate the language of each text
 element of HTML, using 'lang' attributes, in order for features to be
@@ -179,12 +201,18 @@ and never crash into one another.
 
 mark positioning
 ----------------
+Positioning features are not directly accessible to users.
+
 It is conceptually more direct, and in principle easier, to position marks
 relative to letters using the various mark positioning lookups, rather 
 than to provide separate glyphs for each combination.
+
+GNU FreeFont makes especially heavy use of positioning of marks in Indic
+scripts, in which both vowels and consonants may be positioned above or 
+below a base letter.
 
 Especially in cases where multiple marks appear on the same base, it can
 get just too messy to be practical.  Unfortunately, pre-composed
 components are often a necessary fallback.
 
-$Id: features.txt 3932 2018-06-06 21:13:06Z Stevan_White $
+$Id: features.txt 4133 2020-03-22 13:05:30Z Stevan_White $
