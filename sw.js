@@ -118,12 +118,18 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((resp) => {
-      return resp || fetch(event.request).then((response) => {
-        return caches.open(cacheName).then((cache) => {
-          cache.put(event.request, response.clone());
-          return response;
-        });
-      });
+      // Cache hit - return response
+      if (resp) {
+        return resp;
+      }
+      return fetch(event.request);
+
+      // return resp || fetch(event.request).then((response) => {
+      //   return caches.open(cacheName).then((cache) => {
+      //     cache.put(event.request, response.clone());
+      //     return response;
+      //   });
+      // });
     })
   );
 });
