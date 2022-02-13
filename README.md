@@ -13,6 +13,13 @@
 
 ## Инсталирање на помошни компоненти
 
+Инсталирајте **Node.js** и **npm** на вообичаениот начин за вашиот оперативен систем.
+
+- https://nodejs.org/en/docs/guides/
+- https://docs.npmjs.com/getting-started
+
+Инсталирајте го **Jekyll** според упатството на https://jekyllrb.com/docs/installation/.
+
 Извршете `npm install` веднаш по клонирањето на складиштето за да ги снимите сите потребни помошни компоненти, пред да можете да го стартувате Jekyll.
 
 ## gulp.js
@@ -31,11 +38,11 @@
 
 Најавната шпица на „Бушава азбука“ е компресирана со `ffmpeg` во видео форматите `H264` и `Webm` со следните команди:
 
-#### `H264`
+#### H264
 
 `ffmpeg -i bushava-azbuka-najavna-shpica-izvor.mp4 -crf 30 -b:a 96k -c:a libvorbis -ar 32000 bushava-azbuka-najavna-shpica.mp4`
 
-#### `Webm`
+#### Webm
 
 `ffmpeg -i bushava-azbuka-najavna-shpica-izvor.mp4 -c:v libvpx-vp9 -crf 50 -b:a 96k -c:a libvorbis -ar 32000 bushava-azbuka-najavna-shpica.webm`
 
