@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Goce Mitevski",
   "license": "ISC",
+  "resolutions": {
+    "glob-parent": "^5.1.2"
+  },
   "dependencies": {
     "bootstrap": "^4.4.1",
     "gulp": "^4.0.2",
