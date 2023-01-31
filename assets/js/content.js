@@ -161,7 +161,16 @@ function modalCreate() {
 
     var videoPlaceholder = $('#videoPlaceholder');
 
-    videoPlaceholder.parent().append(`<iframe id="videoIframe" width="560" height="315" src="` + videoPlaceholder.attr('data-src') + `" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+    const videoIframe = document.createElement("iframe");
+    videoIframe.id = "videoIframe";
+    videoIframe.width = 560;
+    videoIframe.height = 315;
+    videoIframe.src = videoPlaceholder.attr('data-src');
+    videoIframe.frameBorder = "0";
+    videoIframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    videoIframe.allowFullscreen = true;
+
+    videoPlaceholder.parent().append(videoIframe);
 
   });
 
