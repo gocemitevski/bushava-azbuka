@@ -161,7 +161,7 @@ function modalCreate() {
 
     var videoPlaceholder = $('#videoPlaceholder');
 
-    videoPlaceholder.parent().append('<iframe id="videoIframe" width="560" height="315" src="' + videoPlaceholder.attr('data-src') + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+    videoPlaceholder.parent().append(`<iframe id="videoIframe" width="560" height="315" src="` + videoPlaceholder.attr('data-src') + `" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
 
   });
 
