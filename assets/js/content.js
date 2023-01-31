@@ -165,7 +165,7 @@ function modalCreate() {
     videoIframe.id = "videoIframe";
     videoIframe.width = 560;
     videoIframe.height = 315;
-    videoIframe.src = videoPlaceholder.attr('data-src');
+    videoIframe.src = encodeURI(videoPlaceholder.attr('data-src'));
     videoIframe.frameBorder = "0";
     videoIframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
     videoIframe.allowFullscreen = true;
