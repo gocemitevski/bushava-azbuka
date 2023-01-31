@@ -19,7 +19,7 @@
       "src": "assets/sliki/bushava-azbuka-maskable.png",
       "sizes": "325x325",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
   "display": "standalone",
