@@ -1,5 +1,13 @@
 var gulp = require('gulp');
 
+// Boostrap assets
+gulp.task('bootstrap', function () {
+  return gulp.src([
+      'node_modules/bootstrap/scss/**/*',
+    ])
+    .pipe(gulp.dest('_sass/bootstrap/'));
+});
+
 // JavaScript assets
 gulp.task('js', function () {
   return gulp.src([
@@ -16,4 +24,4 @@ gulp.task('watch', function () {
 });
 
 // The default Gulp.js task
-gulp.task('default', gulp.series('js', 'watch'));
+gulp.task('default', gulp.series('bootstrap', 'js', 'watch'));
