@@ -25,13 +25,12 @@ ga_ua: G-9757FRP49Q
 
 # Build settings
 markdown: kramdown
-theme: minima
 exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
 sass:
-  sass_dir: _sass
+  sass_dir: assets/scss
   style: compressed
 collections:
   bukvi:
