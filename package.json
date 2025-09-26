@@ -9,9 +9,6 @@
   },
   "author": "Goce Mitevski",
   "license": "ISC",
-  "resolutions": {
-    "glob-parent": "^5.1.2"
-  },
   "dependencies": {
     "bootstrap": "^4.6.2",
     "gulp": "^4.0.2",
