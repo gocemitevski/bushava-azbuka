@@ -13,10 +13,9 @@
   "author": "Goce Mitevski",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.6.2",
-    "gulp": "^4.0.2",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
     "jquery": "^3.7.1",
-    "popper.js": "^1.16.1",
     "sass": "^1.93.2"
   }
 }
