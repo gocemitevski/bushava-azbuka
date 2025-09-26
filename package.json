@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "sass --load-path=node_modules --no-source-map --style=compressed assets/scss/main.scss assets/main.css",
+    "build": "sass --load-path=node_modules --no-source-map --style=compressed assets/scss/main.scss assets/main.css && rm assets/main.css.map",
     "watch": "sass --load-path=node_modules --watch assets/scss/main.scss assets/main.css",
     "preinstall": "npx npm-force-resolutions",
     "test": "echo \"Error: no test specified\" && exit 1"
