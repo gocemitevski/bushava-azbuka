@@ -1,10 +1,7 @@
----
----
-// ^ Required formatting marks for loading Liquid/Jekyll variables within JS
-
-var cacheName = 'cache-{{ site.time | date: "%Y-%m-%d" }}';
-var siteURL = 'https://bushava-azbuka.mk'
-var resourcesToCache = [
+const today = new Date().toISOString();
+let cacheName = 'cache-' + today;
+let siteURL = 'https://bushava-azbuka.mk'
+let resourcesToCache = [
   siteURL + '/',
   siteURL + '/index.html',
   siteURL + '/bukvi/01-а.html',
