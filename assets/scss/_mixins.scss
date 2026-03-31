@@ -1,5 +1,5 @@
 @mixin navlink-hover($opacity: 8%) {
-  background-color: lighten($banana, $opacity);
+  background-color: scale-color($banana, $lightness: $opacity);
 }
 
 @mixin svg-icon {
