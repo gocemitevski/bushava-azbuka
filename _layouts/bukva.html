@@ -6,7 +6,7 @@
 {% if page.previous %}
 {% assign previous = page.previous %}
 {% else %}
-{% assign last lastPostIndex = site.bukvi | size | minus: 1 %}
+{% assign lastPostIndex = site.bukvi | size | minus: 1 %}
 {% assign previous = site.bukvi[lastPostIndex] %}
 {% endif %}
 
@@ -83,7 +83,7 @@
                         <ul class="list-unstyled">
                           {% for rastenie in page.rastenija %}
                           <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ rastenie }}" target="_blank"
-                              rel="noopener">{{
+                              rel="noopener noreferrer">{{
                                     rastenie }}</a></li>
                           {% endfor %}
                         </ul>
@@ -95,7 +95,7 @@
                         <ul class="list-unstyled">
                           {% for zhivotno in page.zhivotni %}
                           <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ zhivotno }}" target="_blank"
-                              rel="noopener">{{
+                              rel="noopener noreferrer">{{
                                     zhivotno }}</a></li>
                           {% endfor %}
                         </ul>
@@ -105,7 +105,7 @@
                         <ul class="list-unstyled">
                           {% for jadenje in page.jadenja %}
                           <li class="h5 list-unstyled-item"><a href="{{ search_url }}{{ jadenje }}" target="_blank"
-                              rel="noopener">{{
+                              rel="noopener noreferrer">{{
                                     jadenje }}</a></li>
                           {% endfor %}
                         </ul>
