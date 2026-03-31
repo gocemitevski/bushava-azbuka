@@ -29,6 +29,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+  - AGENTS.md
 sass:
   sass_dir: assets/scss
   style: compressed
