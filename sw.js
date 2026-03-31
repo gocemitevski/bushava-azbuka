@@ -1,8 +1,8 @@
 const today = new Date().toISOString();
 let cacheName = 'cache-' + today;
-let siteURL = 'https://bushava-azbuka.mk'
+let siteURL = self.location.origin;
 let resourcesToCache = [
-  siteURL + '/',
+  '/',
   siteURL + '/index.html',
   siteURL + '/bukvi/01-а.html',
   siteURL + '/bukvi/02-б.html',
@@ -37,8 +37,6 @@ let resourcesToCache = [
   siteURL + '/bukvi/31-ш.html',
   siteURL + '/favicon.ico',
   siteURL + '/assets/main.css',
-  siteURL + '/assets/js/jquery.min.js',
-  siteURL + '/assets/js/popper.min.js',
   siteURL + '/assets/js/bootstrap.min.js',
   siteURL + '/assets/js/content.js',
   siteURL + '/assets/video/bushava-azbuka-najavna-shpica-poster.jpg',
@@ -103,7 +101,7 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
-        if (cacheName.indexOf(key) === -1) {
+        if (!cacheName.includes(key)) {
           return caches.delete(key);
         }
       })
@@ -115,22 +113,16 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      // Cache hit - return response
       if (response) {
         return response;
       }
 
       return fetch(event.request).then(
         function(response) {
-          // Check if we received a valid response
           if(!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
 
-          // IMPORTANT: Clone the response. A response is a stream
-          // and because we want the browser to consume the response
-          // as well as the cache consuming the response, we need
-          // to clone it so we have two streams.
           var responseToCache = response.clone();
 
           caches.open(cacheName)
@@ -140,7 +132,9 @@ self.addEventListener('fetch', (event) => {
 
           return response;
         }
-      );
+      ).catch(function() {
+        return caches.match('/');
+      });
     })
   );
 });
