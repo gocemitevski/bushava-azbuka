@@ -6,16 +6,14 @@
   "scripts": {
     "build": "sass --load-path=node_modules --no-source-map --style=compressed assets/scss/main.scss assets/main.css && rm assets/main.css.map",
     "watch": "sass --load-path=node_modules --watch assets/scss/main.scss assets/main.css",
-    "copy-js": "cp node_modules/jquery/dist/jquery.min.js node_modules/@popperjs/core/dist/umd/popper.min.js node_modules/bootstrap/dist/js/bootstrap.min.js assets/js",
+    "copy-js": "cp node_modules/bootstrap/dist/js/bootstrap.min.js assets/js",
     "preinstall": "npx npm-force-resolutions",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Goce Mitevski",
   "license": "ISC",
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
-    "jquery": "^3.7.1",
     "sass": "^1.93.2"
   }
 }
