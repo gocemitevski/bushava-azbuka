@@ -12,7 +12,7 @@ This is a digitized version of the Macedonian children's alphabet book "Буша
 npm install           # Install dependencies (run after cloning)
 npm run build         # Build optimized CSS from SCSS (compressed)
 npm run watch         # Watch mode for SCSS (generates source maps)
-npm run copy-js       # Copy jQuery, Popper, Bootstrap to assets/js
+npm run copy-js       # Copy Bootstrap JS to assets/js
 ```
 
 ### Jekyll Commands
@@ -52,13 +52,10 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 6. **Color System**: Follow Bootstrap's color scale (100-900)
 7. **Comments**: Use `//` for single-line, `/* */` for multi-line; use scss-docs markers for variables
 
-### JavaScript (sw.js)
+### JavaScript
 
-1. **Style**: Use ES6+ (const, arrow functions)
-2. **Naming**: camelCase for variables and functions
-3. **Error Handling**: Add .catch() for offline fallback
-4. **Caching**: Cache-first strategy for static assets
-5. **URL**: Use `self.location.origin` instead of hardcoded URL
+1. **sw.js**: Service worker using ES6+ (const, arrow functions), camelCase, cache-first strategy for static assets
+2. **content.js**: Vanilla JavaScript (no jQuery), ES6+, camelCase, DOM manipulation via native APIs; loaded via `<script defer>`
 
 ### HTML (Jekyll/Liquid)
 
@@ -83,7 +80,7 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 ### Asset Management
 
 - CSS: Generated from SCSS via `npm run build`
-- JS: jQuery, Popper.js, Bootstrap (minified copies from node_modules)
+- JS: Vanilla JS (`content.js`) and Bootstrap JS (minified copy from node_modules)
 - Fonts: FreeSerif WOFF/WOFF2 in `assets/free-serif/`
 - Images: Optimized PNGs and SVGs in `assets/`
 - Video: H.264 and WebM formats for compatibility
@@ -97,7 +94,7 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 ├── _bukvi/           # Letter pages (generated content)
 ├── assets/
 │   ├── scss/         # SCSS source files (_*.scss, main.scss)
-│   ├── js/           # JavaScript (copied from node_modules)
+│   ├── js/           # JavaScript (bootstrap.min.js, content.js)
 │   ├── sliki/        # Images
 │   ├── video/        # Video files
 │   └── free-serif/  # Web fonts
@@ -128,7 +125,7 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 
 ## Important Notes
 
-- No linting or type checking configured
+- AGENTS.md excluded from Jekyll build (in `_config.yml`) to avoid Liquid syntax errors
 - No automated tests
 - Dark mode disabled (`$enable-dark-mode: false`)
 - Use `bundle exec` for Jekyll commands to ensure correct gem versions
@@ -145,7 +142,7 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 ### Dependencies
 
 - **Ruby**: Jekyll 4.2.1, jekyll-feed, webrick
-- **Node.js**: sass, bootstrap, jquery, @popperjs/core
+- **Node.js**: sass, bootstrap
 - **CSS Framework**: Bootstrap 5 (customized, dark mode disabled)
 
 ### Jekyll Configuration
@@ -194,7 +191,7 @@ All Bootstrap variables are customized in `assets/scss/_variables.scss`:
 
 ### Performance Considerations
 
-- Minified Bootstrap, jQuery, Popper (do not modify)
+- Minified Bootstrap JS (do not modify)
 - Compressed CSS output
 - Web fonts preloaded in HTML head
 - Video poster images for perceived performance
