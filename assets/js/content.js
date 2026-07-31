@@ -222,7 +222,7 @@ if ('serviceWorker' in navigator) {
         // Push a new state to the browser
         history.pushState({
           'title': document.title,
-          'content': contentEl.innerHTML
+          'content': newContent
         }, newTitle, url);
 
         // Collapse navbar on mobile
