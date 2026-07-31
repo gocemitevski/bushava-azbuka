@@ -1,5 +1,8 @@
-const today = new Date().toISOString();
-let cacheName = 'cache-' + today;
+---
+---
+const cacheVersion = '{{ site.time | date: "%Y%m%d%H%M%S" }}';
+const CACHE_PREFIX = 'cache';
+const cacheName = CACHE_PREFIX + '-' + cacheVersion;
 let siteURL = self.location.origin;
 let resourcesToCache = [
   '/',
@@ -87,6 +90,7 @@ let resourcesToCache = [
 
 self.addEventListener('install', function (event) {
   // console.log('Service Worker - Install event!');
+  self.skipWaiting();
   event.waitUntil(
     caches.open(cacheName)
       .then(function (cache) {
@@ -101,11 +105,14 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
-        if (!cacheName.includes(key)) {
+        if (key.startsWith(CACHE_PREFIX) && key !== cacheName) {
           return caches.delete(key);
         }
       })
       )
+    })
+    .then(function () {
+      return self.clients.claim();
     })
   )
 })
