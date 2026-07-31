@@ -23,6 +23,8 @@ bundle exec jekyll serve --incremental   # Start local server
 jekyll build          # Build for production
 ```
 
+Note: `jekyll serve` overrides `site.url` to `http://localhost:4000` when `Jekyll.env` is `development` (the default), so local pages link to localhost. `jekyll build` always uses the production `site.url` from `_config.yml`; exporting `JEKYLL_ENV=production` makes `serve` keep the production URL too.
+
 ### Running a Single Test
 
 There are no test frameworks configured. The `npm test` command exits with error:
@@ -54,8 +56,8 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 
 ### JavaScript
 
-1. **sw.js**: Service worker using ES6+ (const, arrow functions), camelCase, cache-first strategy for static assets
-2. **content.js**: Vanilla JavaScript (no jQuery), ES6+, camelCase, DOM manipulation via native APIs; loaded via `<script defer>`
+1. **sw.js**: Service worker using ES6+ (const, arrow functions), camelCase, cache-first strategy for static assets. Liquid-processed (front matter + `site.*` variables) — validate the built output (`node --check _site/sw.js`), not the source, which contains `{{ }}` tags and won't parse as JS
+2. **content.js**: Vanilla JavaScript (no jQuery), ES6+, camelCase, DOM manipulation via native APIs; loaded via `<script defer>`. SPA letter navigation (`switchLetter`) with `currentRequestId` race protection and unified nav highlighting via `setActiveNavItem(url)`
 
 ### HTML (Jekyll/Liquid)
 
@@ -98,6 +100,7 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 │   ├── sliki/        # Images
 │   ├── video/        # Video files
 │   └── free-serif/  # Web fonts
+├── manifest.json     # PWA manifest
 ├── _config.yml       # Jekyll configuration
 ├── sw.js             # Service worker (PWA)
 ├── Gemfile           # Ruby dependencies (Jekyll)
@@ -120,8 +123,10 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 
 ### PWA Updates
 
-- Edit `sw.js` to change cache name or resources
-- Service worker auto-updates on page refresh
+- Edit `sw.js` source to change cache strategy, precache filters, or handlers
+- The cache name and precache list are auto-generated from Jekyll data at build time (`site.time` for the cache version; `site.bukvi` + `site.static_files` for resources)
+- Rebuild with `jekyll build` (or `serve`) after editing so the Liquid output regenerates
+- Service worker picks up on the next page load via `skipWaiting`, creating a new `cache-*` cache and pruning old ones
 
 ## Important Notes
 
@@ -141,7 +146,7 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 
 ### Dependencies
 
-- **Ruby**: Jekyll 4.2.1, jekyll-feed, webrick
+- **Ruby**: github-pages (pins Jekyll 3.10.0), jekyll-feed, webrick
 - **Node.js**: sass, bootstrap
 - **CSS Framework**: Bootstrap 5 (customized, dark mode disabled)
 
@@ -154,9 +159,14 @@ To add tests, consider adding a framework like Jest for JavaScript or a Ruby tes
 
 ### PWA Configuration
 
-- Service worker: `sw.js`
+- Service worker: `sw.js` (Liquid-processed; has `---` front matter)
 - Cache strategy: Cache-first for static assets
-- Cache invalidation: On service worker update (new cache name with date)
+- Precache list: Auto-generated from `site.bukvi` and `site.static_files` (asset extension whitelist, `assets/` path filter)
+- Cache invalidation: New cache name from `site.time` on each build; old `cache-*` caches deleted on activate
+- Non-GET requests bypass the fetch handler (default network behavior)
+- Install uses `Promise.allSettled` so individual resource failures don't block installation
+- Offline fallback: cached `/` is served for navigation requests when the network fails
+- Manifest link in `_includes/head.html` uses an absolute `{{ site.url }}/manifest.json` URL (relative URLs break on subpages)
 
 ### Bootstrap Customization
 
