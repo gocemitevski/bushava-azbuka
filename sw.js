@@ -3,8 +3,8 @@
 const cacheVersion = '{{ site.time | date: "%Y%m%d%H%M%S" }}';
 const CACHE_PREFIX = 'cache';
 const cacheName = CACHE_PREFIX + '-' + cacheVersion;
-let siteURL = self.location.origin;
-let resourcesToCache = [
+const siteURL = self.location.origin;
+const resourcesToCache = [
   '/',
   siteURL + '/index.html',
 {%- for bukva in site.bukvi %}
@@ -54,6 +54,10 @@ self.addEventListener('activate', function (event) {
 })
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
@@ -66,7 +70,7 @@ self.addEventListener('fetch', (event) => {
             return response;
           }
 
-          var responseToCache = response.clone();
+          const responseToCache = response.clone();
 
           caches.open(cacheName)
             .then(function(cache) {
