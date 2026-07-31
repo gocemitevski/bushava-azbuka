@@ -1,7 +1,7 @@
 // Register Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('/sw.js')
       .catch(function (err) {
         console.error('Service worker registration failed:', err);
       });
@@ -20,38 +20,37 @@ if ('serviceWorker' in navigator) {
   const buttonShare = document.querySelector('.btn-share');
   const navbarContent = document.getElementById('navbarSupportedContent');
 
-  if (!audioBtn || !videoEl || !buttonShare) {
-    return;
-  }
-
   // Initialize audio state
   if (localStorage.getItem('isUnmuted') === null) {
     localStorage.setItem('isUnmuted', '0');
   }
 
-  // Show share button if supported
-  if (navigator.share) {
-    buttonShare.classList.remove('d-none');
-  }
-
   // Share button handler
-  buttonShare.addEventListener('click', function () {
+  if (buttonShare) {
+    // Show share button if supported
     if (navigator.share) {
-      navigator.share({
-        title: document.title,
-        text: document.querySelector('meta[name="description"]').getAttribute('content'),
-        url: document.location.href
-      })
-        .then(function () {
-          log('Successful share');
-        })
-        .catch(function (err) {
-          error('Error sharing:', err);
-        });
-    } else {
-      alert('Извинете, вашиот прелистувач не ја поддржува оваа можност.');
+      buttonShare.classList.remove('d-none');
     }
-  });
+
+    buttonShare.addEventListener('click', function () {
+      if (navigator.share) {
+        const descriptionEl = document.querySelector('meta[name="description"]');
+        navigator.share({
+          title: document.title,
+          text: descriptionEl ? descriptionEl.getAttribute('content') : '',
+          url: document.location.href
+        })
+          .then(function () {
+            log('Successful share');
+          })
+          .catch(function (err) {
+            error('Error sharing:', err);
+          });
+      } else {
+        alert('Извинете, вашиот прелистувач не ја поддржува оваа можност.');
+      }
+    });
+  }
 
   // Navigation button handlers
   document.addEventListener('click', function (e) {
@@ -71,16 +70,18 @@ if ('serviceWorker' in navigator) {
   });
 
   // Audio toggle handler
-  audioBtn.addEventListener('click', function () {
-    if (videoEl.muted) {
-      videoEl.muted = false;
-      localStorage.setItem('isUnmuted', '1');
-    } else {
-      videoEl.muted = true;
-      localStorage.setItem('isUnmuted', '0');
-    }
-    audioIconToggle();
-  });
+  if (audioBtn && videoEl) {
+    audioBtn.addEventListener('click', function () {
+      if (videoEl.muted) {
+        videoEl.muted = false;
+        localStorage.setItem('isUnmuted', '1');
+      } else {
+        videoEl.muted = true;
+        localStorage.setItem('isUnmuted', '0');
+      }
+      audioIconToggle();
+    });
+  }
 
   // Modal handlers - use namespaced events to prevent duplicates
   document.addEventListener('show.bs.modal', function (e) {
@@ -88,10 +89,17 @@ if ('serviceWorker' in navigator) {
       return;
     }
 
-    videoEl.muted = true;
-    audioBtn.classList.remove('on');
+    if (videoEl) {
+      videoEl.muted = true;
+    }
+    if (audioBtn) {
+      audioBtn.classList.remove('on');
+    }
 
     const videoPlaceholder = document.getElementById('videoPlaceholder');
+    if (!videoPlaceholder) {
+      return;
+    }
     const existingIframe = document.getElementById('videoIframe');
     if (existingIframe) {
       existingIframe.remove();
@@ -117,7 +125,7 @@ if ('serviceWorker' in navigator) {
     const isUnmuted = localStorage.getItem('isUnmuted');
     const iframe = document.getElementById('videoIframe');
 
-    if (isUnmuted === '1') {
+    if (isUnmuted === '1' && videoEl) {
       videoEl.muted = false;
       audioIconToggle();
     }
@@ -132,8 +140,10 @@ if ('serviceWorker' in navigator) {
     if (e.state) {
       document.title = e.state.title;
       const contentEl = document.getElementById('content');
-      contentEl.classList.remove('empty');
-      contentEl.innerHTML = e.state.content;
+      if (contentEl) {
+        contentEl.classList.remove('empty');
+        contentEl.innerHTML = e.state.content;
+      }
 
       // Update active nav item
       const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
@@ -157,8 +167,12 @@ if ('serviceWorker' in navigator) {
   }
 
   function audioIconToggle() {
-    audioBtn.classList.toggle('on');
+    if (audioBtn) {
+      audioBtn.classList.toggle('on');
+    }
   }
+
+  let currentRequestId = 0;
 
   function switchLetter(url) {
     // Don't reload current letter
@@ -166,12 +180,22 @@ if ('serviceWorker' in navigator) {
       return;
     }
 
+    // Track latest request so stale responses are ignored
+    const requestId = ++currentRequestId;
+
     // Send a Get request to the URL
     fetch(url)
       .then(function (response) {
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status + ' for ' + url);
+        }
         return response.text();
       })
       .then(function (data) {
+        if (requestId !== currentRequestId) {
+          return;
+        }
+
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
 
@@ -184,11 +208,16 @@ if ('serviceWorker' in navigator) {
         // Replace the content
         const newContent = doc.querySelector('#content').innerHTML;
         const contentEl = document.getElementById('content');
-        contentEl.classList.remove('empty');
-        contentEl.innerHTML = newContent;
+        if (contentEl) {
+          contentEl.classList.remove('empty');
+          contentEl.innerHTML = newContent;
+        }
 
         // Mark current letter in main navigation
-        markNavItem(document.querySelector('.navbar-nav a[href="' + url + '"]'));
+        const navLink = document.querySelector('.navbar-nav a[href="' + url + '"]');
+        if (navLink) {
+          markNavItem(navLink);
+        }
 
         // Push a new state to the browser
         history.pushState({
@@ -202,7 +231,9 @@ if ('serviceWorker' in navigator) {
         }
       })
       .catch(function (err) {
-        error('Error loading letter:', err);
+        if (requestId === currentRequestId) {
+          error('Error loading letter:', err);
+        }
       });
   }
 
