@@ -58,6 +58,7 @@ if ('serviceWorker' in navigator) {
     if (navBtn) {
       e.preventDefault();
       switchLetter(navBtn.getAttribute('href'));
+      return;
     }
 
     const navLink = e.target.closest('.navbar-nav .nav-link');
