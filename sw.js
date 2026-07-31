@@ -133,7 +133,10 @@ self.addEventListener('fetch', (event) => {
           return response;
         }
       ).catch(function() {
-        return caches.match('/');
+        if (event.request.mode === 'navigate') {
+          return caches.match('/');
+        }
+        return Response.error();
       });
     })
   );
