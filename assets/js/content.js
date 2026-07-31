@@ -64,7 +64,7 @@ if ('serviceWorker' in navigator) {
     const navLink = e.target.closest('.navbar-nav .nav-link');
     if (navLink) {
       e.preventDefault();
-      markNavItem(navLink);
+      setActiveNavItem(navLink.getAttribute('href'));
       switchLetter(navLink.getAttribute('href'));
     }
   });
@@ -146,24 +146,19 @@ if ('serviceWorker' in navigator) {
       }
 
       // Update active nav item
-      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-      const currentUrl = window.location.href;
-      navLinks.forEach(function (link) {
-        const parent = link.parentElement;
-        if (link.getAttribute('href') === currentUrl) {
-          parent.classList.add('active');
-        } else {
-          parent.classList.remove('active');
-        }
-      });
+      setActiveNavItem(window.location.href);
     }
   });
 
-  function markNavItem(item) {
+  function setActiveNavItem(url) {
     document.querySelectorAll('.navbar-nav .nav-item').forEach(function (el) {
       el.classList.remove('active');
     });
-    item.parentElement.classList.add('active');
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
+      if (link.getAttribute('href') === url) {
+        link.parentElement.classList.add('active');
+      }
+    });
   }
 
   function audioIconToggle() {
@@ -214,10 +209,7 @@ if ('serviceWorker' in navigator) {
         }
 
         // Mark current letter in main navigation
-        const navLink = document.querySelector('.navbar-nav a[href="' + url + '"]');
-        if (navLink) {
-          markNavItem(navLink);
-        }
+        setActiveNavItem(url);
 
         // Push a new state to the browser
         history.pushState({
